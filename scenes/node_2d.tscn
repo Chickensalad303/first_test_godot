@@ -3901,7 +3901,6 @@ layer_0/tile_data = PackedInt32Array(262166, 65536, 0, 262167, 131072, 0, 327703
 
 [node name="water_tilemap" type="TileMap" parent="."]
 position = Vector2(622, 1536)
-scale = Vector2(1, 1)
 tile_set = SubResource("TileSet_rpe3f")
 format = 2
 layer_0/name = "water_layer"
