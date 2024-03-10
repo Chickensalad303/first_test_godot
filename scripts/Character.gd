@@ -7,15 +7,22 @@ const SPEED = 150.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 #var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+signal k_pressed
 func _ready():
 	pass
 
 func _process(delta):
 	pass
 	
-func _input(event):
-	pass
 
+
+func _input(event):
+	if event is InputEventKey:
+		if event.is_action_pressed("k_key"):
+			# emit signal, so any script can connect to it
+			k_pressed.emit()
+			
+			
 func _physics_process(delta):
 	var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	if direction.x == 0 and direction.y == 0:

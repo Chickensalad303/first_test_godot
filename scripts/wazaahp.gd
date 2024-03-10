@@ -12,12 +12,22 @@ func on_viewport_resize():
 	#sound.data = file.get_buffer(file.get_length())
 	#return sound
 
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	middle = get_viewport_rect().size / 2
 	get_tree().get_root().size_changed.connect(on_viewport_resize)
 	
+	#connect to signal being emit from characterbody2d
+	#whenever recieving signal k_pressed run function
+	#_run_on_k_pressed
+	var body = get_node("../CharacterBody2D")
+	body.k_pressed.connect(_run_on_k_pressed)
 
+func _run_on_k_pressed():
+	print("k has been pressed")
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
@@ -30,8 +40,6 @@ func _input(event):
 		if event.keycode == KEY_SPACE: 
 			if node != null:
 				node.queue_free()
-			
-
 			node = Label.new()
 			node.set_name("popup")
 			node.set_text("Bom")
@@ -40,7 +48,8 @@ func _input(event):
 			if !audio_player.playing:
 				#audio_player.stream = play_mp3("res://public/mp3/Boom (Big Shaq).mp3")
 				audio_player.play()
-				
-
 			add_child(node)
 	
+
+
+
