@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b3dy5na0yyfnm"
+path="res://.godot/imported/Boom (Big Shaq).mp3-37f6c6a75d30ac8664897331219773b1.mp3str"
+
+[deps]
+
+source_file="res://public/mp3/Boom (Big Shaq).mp3"
+dest_files=["res://.godot/imported/Boom (Big Shaq).mp3-37f6c6a75d30ac8664897331219773b1.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4
