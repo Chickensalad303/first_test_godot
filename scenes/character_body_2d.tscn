@@ -10,8 +10,9 @@
 [ext_resource type="Texture2D" uid="uid://de8rbuk6ycqja" path="res://public/tiles/Pirate Bomb/Sprites/7-Objects/13-Run Particles/5.png" id="7_3cyix"]
 [ext_resource type="Texture2D" uid="uid://cfgw6q4eyrgyf" path="res://public/tiles/Pirate Bomb/Sprites/7-Objects/13-Run Particles/6.png" id="8_dgc61"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_g8vdv"]
-size = Vector2(32, 32)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_is57o"]
+radius = 15.0
+height = 40.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cqpbd"]
 atlas = ExtResource("2_fymh3")
@@ -192,7 +193,8 @@ script = ExtResource("1_6b0ds")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 15)
-shape = SubResource("RectangleShape2D_g8vdv")
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_is57o")
 debug_color = Color(0.933333, 0.137255, 0.54902, 1)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -208,4 +210,4 @@ sprite_frames = SubResource("SpriteFrames_enhl6")
 animation = &"run_dust"
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(1.2, 1.2)
+zoom = Vector2(2, 2)
