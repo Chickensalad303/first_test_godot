@@ -1,4 +1,4 @@
-[gd_scene load_steps=94 format=3 uid="uid://n4vro8la03ju"]
+[gd_scene load_steps=97 format=3 uid="uid://n4vro8la03ju"]
 
 [ext_resource type="Script" path="res://scripts/wazaahp.gd" id="1_nem0b"]
 [ext_resource type="AudioStream" uid="uid://b3dy5na0yyfnm" path="res://public/mp3/Boom (Big Shaq).mp3" id="2_sdobj"]
@@ -39,6 +39,8 @@
 [ext_resource type="Texture2D" uid="uid://ckoqa2driyrk6" path="res://public/tiles/Tiny Swords (Update 010)/Deco/04.png" id="35_d0x4l"]
 [ext_resource type="Texture2D" uid="uid://b8jgq2u4jit25" path="res://public/tiles/Tiny Swords (Update 010)/Deco/06.png" id="36_yqeva"]
 [ext_resource type="Texture2D" uid="uid://71sm0b0fhnam" path="res://public/tiles/Tiny Swords (Update 010)/Deco/07.png" id="37_aren5"]
+[ext_resource type="Shader" uid="uid://dwg6vmpm4vfn5" path="res://shaders/node_2d.tres" id="40_dthfk"]
+[ext_resource type="Texture2D" uid="uid://82htakj5rdga" path="res://icon.svg" id="41_orsln"]
 
 [sub_resource type="FontFile" id="FontFile_8reum"]
 cache/0/16/0/ascent = 0.0
@@ -3925,6 +3927,9 @@ sources/2 = SubResource("TileSetAtlasSource_t51o5")
 sources/3 = SubResource("TileSetAtlasSource_o035v")
 pattern_0 = SubResource("TileMapPattern_g10xh")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3q7ik"]
+shader = ExtResource("40_dthfk")
+
 [node name="Node2D" type="Node2D"]
 position = Vector2(575, 307)
 
@@ -3985,3 +3990,8 @@ layer_0/tile_data = PackedInt32Array(3342342, 3, 0, 3407878, 3, 2, 3473414, 3, 2
 layer_1/name = "water_props"
 layer_1/z_index = -3
 layer_1/tile_data = PackedInt32Array()
+
+[node name="Icon" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_3q7ik")
+position = Vector2(1410, -116)
+texture = ExtResource("41_orsln")

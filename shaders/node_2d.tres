@@ -1,11 +1,32 @@
-[gd_resource type="VisualShader" load_steps=4 format=3 uid="uid://dwg6vmpm4vfn5"]
+[gd_resource type="VisualShader" load_steps=9 format=3 uid="uid://dwg6vmpm4vfn5"]
 
-[ext_resource type="Texture2D" uid="uid://82htakj5rdga" path="res://icon.svg" id="1_xd43o"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_i2fel"]
+noise_type = 2
+frequency = 0.0414
+fractal_octaves = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vc53q"]
+noise = SubResource("FastNoiseLite_i2fel")
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_r68b2"]
-texture = ExtResource("1_xd43o")
+texture = SubResource("NoiseTexture2D_vc53q")
 
-[sub_resource type="VisualShaderNodeColorFunc" id="VisualShaderNodeColorFunc_ol5uv"]
+[sub_resource type="VisualShaderNodeRemap" id="VisualShaderNodeRemap_igqnr"]
+output_port_for_preview = 0
+default_input_values = [1, 0.5, 2, 1.0, 3, 0.0, 4, 1.0]
+
+[sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_gmkb7"]
+constant = Color(0.357136, 0.783278, 0.774213, 1)
+
+[sub_resource type="VisualShaderNodeMix" id="VisualShaderNodeMix_yidjv"]
+default_input_values = [0, Quaternion(0, 0, 0, 0), 1, Quaternion(1, 1, 1, 1), 2, Quaternion(0.5, 0.5, 0.5, 0.5)]
+op_type = 5
+
+[sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_00yjw"]
+
+[sub_resource type="VisualShaderNodeIf" id="VisualShaderNodeIf_8bjci"]
+output_port_for_preview = 0
+default_input_values = [0, 0.0, 1, 0.4, 2, 1e-05, 3, Vector3(1, 1, 1), 4, Vector3(0, 0, 0), 5, Vector3(1, 1, 1)]
 
 [resource]
 code = "shader_type canvas_item;
@@ -16,32 +37,76 @@ uniform sampler2D tex_frg_2;
 
 
 void fragment() {
+// ColorConstant:7
+	vec4 n_out7p0 = vec4(1.000000, 1.000000, 1.000000, 1.000000);
+
+
+// ColorConstant:5
+	vec4 n_out5p0 = vec4(0.357136, 0.783278, 0.774213, 1.000000);
+
+
 // Texture2D:2
 	vec4 n_out2p0 = texture(tex_frg_2, UV);
 
 
-	vec3 n_out3p0;
-// ColorFunc:3
+	float n_out4p0;
+// Remap:4
+	float n_in4p1 = 0.50000;
+	float n_in4p2 = 1.00000;
+	float n_in4p3 = 0.00000;
+	float n_in4p4 = 1.00000;
 	{
-		vec3 c = vec3(n_out2p0.xyz);
-		float max1 = max(c.r, c.g);
-		float max2 = max(max1, c.b);
-		n_out3p0 = vec3(max2, max2, max2);
+		float __input_range = n_in4p2 - n_in4p1;
+		float __output_range = n_in4p4 - n_in4p3;
+		n_out4p0 = n_in4p3 + __output_range * ((n_out2p0.x - n_in4p1) / __input_range);
 	}
 
 
+	vec3 n_out8p0;
+// If:8
+	float n_in8p1 = 0.40000;
+	float n_in8p2 = 0.00001;
+	vec3 n_in8p3 = vec3(1.00000, 1.00000, 1.00000);
+	vec3 n_in8p4 = vec3(0.00000, 0.00000, 0.00000);
+	vec3 n_in8p5 = vec3(1.00000, 1.00000, 1.00000);
+	if(abs(n_out4p0 - n_in8p1) < n_in8p2)
+	{
+		n_out8p0 = n_in8p3;
+	}
+	else if(n_out4p0 < n_in8p1)
+	{
+		n_out8p0 = n_in8p5;
+	}
+	else
+	{
+		n_out8p0 = n_in8p4;
+	}
+
+
+// Mix:6
+	vec4 n_out6p0 = mix(n_out7p0, n_out5p0, vec4(n_out8p0, 0.0));
+
+
 // Output:0
-	COLOR.rgb = n_out3p0;
+	COLOR.rgb = vec3(n_out6p0.xyz);
 
 
 }
 "
-graph_offset = Vector2(9.33743, -49.8839)
+graph_offset = Vector2(-479.574, -262.294)
 mode = 1
 flags/light_only = false
 nodes/fragment/0/position = Vector2(920, 140)
 nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_r68b2")
-nodes/fragment/2/position = Vector2(360, 140)
-nodes/fragment/3/node = SubResource("VisualShaderNodeColorFunc_ol5uv")
-nodes/fragment/3/position = Vector2(680, 180)
-nodes/fragment/connections = PackedInt32Array(2, 0, 3, 0, 3, 0, 0, 0)
+nodes/fragment/2/position = Vector2(-120, 80)
+nodes/fragment/4/node = SubResource("VisualShaderNodeRemap_igqnr")
+nodes/fragment/4/position = Vector2(140, -40)
+nodes/fragment/5/node = SubResource("VisualShaderNodeColorConstant_gmkb7")
+nodes/fragment/5/position = Vector2(100, -220)
+nodes/fragment/6/node = SubResource("VisualShaderNodeMix_yidjv")
+nodes/fragment/6/position = Vector2(640, -180)
+nodes/fragment/7/node = SubResource("VisualShaderNodeColorConstant_00yjw")
+nodes/fragment/7/position = Vector2(100, -140)
+nodes/fragment/8/node = SubResource("VisualShaderNodeIf_8bjci")
+nodes/fragment/8/position = Vector2(400, -40)
+nodes/fragment/connections = PackedInt32Array(6, 0, 0, 0, 2, 0, 4, 0, 4, 0, 8, 0, 8, 0, 6, 2, 5, 0, 6, 1, 7, 0, 6, 0)
