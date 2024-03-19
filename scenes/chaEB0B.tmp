@@ -181,7 +181,7 @@ tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "clips": PackedStringArray("dust"),
-"times": PackedFloat32Array(0)
+"times": PackedFloat32Array(0.5)
 }
 
 [sub_resource type="Animation" id="Animation_f4bik"]
@@ -270,6 +270,7 @@ _data = {
 }
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
+scale = Vector2(0.8, 0.8)
 collision_layer = 3
 collision_mask = 3
 safe_margin = 0.001
@@ -277,6 +278,7 @@ script = ExtResource("1_6b0ds")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(61.25, -15)
+scale = Vector2(1, 1)
 shape = SubResource("CapsuleShape2D_4mhby")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -288,7 +290,7 @@ scale = Vector2(1, 1)
 texture = ExtResource("2_fymh3")
 hframes = 6
 vframes = 6
-frame = 4
+frame = 10
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
@@ -297,11 +299,10 @@ libraries = {
 
 [node name="Sprite2D" type="Sprite2D" parent="Sprite2D"]
 position = Vector2(-31.25, 18.75)
-texture = ExtResource("14_o1bai")
+texture = ExtResource("13_k65ix")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D/Sprite2D"]
 root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_41t78")
 }
-blend_times = [&"dust", &"dust", 0.5, &"dust", &"None", 0.5]
