@@ -1,0 +1,12 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dr21inq0pemrd"]
+
+[ext_resource type="Shader" path="res://shaders/water.gdshader" id="1_mefn4"]
+
+[resource]
+shader = ExtResource("1_mefn4")
+shader_parameter/WATER2_COL = Color(0.0588235, 0.529412, 0.776471, 1)
+shader_parameter/FOAM_COL = Color(0.87451, 0.988235, 1, 1)
+shader_parameter/distortion_speed = 2.0
+shader_parameter/tile = Vector2(5, 5)
+shader_parameter/wave_offset = Vector2(0, 0)
+shader_parameter/detect_border_by_color = Color(0.855, 1, 0.996, 1)

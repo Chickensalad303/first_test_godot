@@ -284,11 +284,10 @@ zoom = Vector2(2, 2)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(2.84217e-13, 1.42109e-13)
-scale = Vector2(1, 1)
 texture = ExtResource("2_fymh3")
 hframes = 6
 vframes = 6
-frame = 4
+frame = 6
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
@@ -297,11 +296,11 @@ libraries = {
 
 [node name="Sprite2D" type="Sprite2D" parent="Sprite2D"]
 position = Vector2(-31.25, 18.75)
-texture = ExtResource("14_o1bai")
+texture = ExtResource("12_eytcs")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D/Sprite2D"]
 root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_41t78")
 }
-blend_times = [&"dust", &"dust", 0.5, &"dust", &"None", 0.5]
+blend_times = [&"dust", &"dust", 0.5]
