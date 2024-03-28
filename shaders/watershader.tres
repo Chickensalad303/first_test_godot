@@ -9,4 +9,5 @@ shader_parameter/FOAM_COL = Color(0.87451, 0.988235, 1, 1)
 shader_parameter/distortion_speed = 2.0
 shader_parameter/tile = Vector2(5, 5)
 shader_parameter/wave_offset = Vector2(0, 0)
+shader_parameter/scale = 0.25
 shader_parameter/detect_border_by_color = Color(0.855, 1, 0.996, 1)

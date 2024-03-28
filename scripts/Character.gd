@@ -67,8 +67,11 @@ func character_animation_player(delta, player_state):
 		sprite.scale.x = -1
 		anim_player.play(player_state)
 	elif Input.is_action_just_pressed("move_up"):
-		anim_player.play(player_state)
+		sprite.scale.x = -1
+		#anim_player.play(player_state)
+		anim_player.play_backwards(player_state)
 	elif Input.is_action_just_pressed("move_down"):
+		sprite.scale.x = 1
 		anim_player.play(player_state)
 	else:	
 		anim_player.play(player_state)

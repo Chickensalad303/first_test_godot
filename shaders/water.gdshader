@@ -14,7 +14,7 @@ const float SIXPI = 18.84955592;
 
 uniform sampler2D screen_texture : hint_screen_texture, repeat_disable, filter_nearest;
 
-
+uniform float scale : hint_range(0.0, 1.0, 0.025) = 0.25;
 uniform vec4 detect_border_by_color : source_color = vec4(0.855, 1, 0.996, 1.0);
 
 // these are functions for wave shader
@@ -109,7 +109,7 @@ float waterlayer(vec2 uv)
 
 vec3 water(vec2 uv, vec3 cdir, float iTime, vec3 water_below)
 {
-    uv *= vec2(0.25);
+    uv *= vec2(scale);
     // Parallax height distortion with two directional waves at
     // slightly different angles.
     vec2 a = 0.025 * cdir.xz / cdir.y; // Parallax offset
