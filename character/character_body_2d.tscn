@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bj1mhjnadbwau"]
+[gd_scene load_steps=22 format=3 uid="uid://bj1mhjnadbwau"]
 
 [ext_resource type="Script" path="res://scripts/Character.gd" id="1_6b0ds"]
 [ext_resource type="Texture2D" uid="uid://dwnehdos5kvfm" path="res://public/tiles/Tiny Swords (Update 010)/Factions/Knights/Troops/Pawn/Purple/Pawn_Purple.png" id="2_fymh3"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bfl0lkdjn3sky" path="res://public/tiles/Treasure Hunters/Treasure Hunters/The Crusty Crew/Sprites/Dust Particles/Run 01.png" id="11_uxyu0"]
 [ext_resource type="Texture2D" uid="uid://bvq1h7bo6e68e" path="res://public/tiles/Treasure Hunters/Treasure Hunters/The Crusty Crew/Sprites/Dust Particles/Run 02.png" id="12_eytcs"]
 [ext_resource type="Script" path="res://character/NormaStatel.gd" id="12_hyjom"]
+[ext_resource type="Script" path="res://character/Attack.gd" id="13_e285k"]
 [ext_resource type="Texture2D" uid="uid://dh4r8m0cdtm2j" path="res://public/tiles/Treasure Hunters/Treasure Hunters/The Crusty Crew/Sprites/Dust Particles/Run 03.png" id="13_k65ix"]
 [ext_resource type="Texture2D" uid="uid://dwodm5h3vnpre" path="res://public/tiles/Treasure Hunters/Treasure Hunters/The Crusty Crew/Sprites/Dust Particles/Run 04.png" id="14_o1bai"]
 [ext_resource type="Texture2D" uid="uid://dugcdbkkvuoa" path="res://public/tiles/Treasure Hunters/Treasure Hunters/The Crusty Crew/Sprites/Dust Particles/Run 05.png" id="15_amcpe"]
@@ -288,10 +289,8 @@ zoom = Vector2(2, 2)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(2.84217e-13, 1.42109e-13)
-texture = ExtResource("2_fymh3")
+texture = ExtResource("2_hth0n")
 hframes = 6
-vframes = 6
-frame = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
@@ -319,4 +318,6 @@ script = ExtResource("12_hyjom")
 
 [node name="Slowed" type="Node" parent="CharacterStateMachine"]
 script = ExtResource("11_idkss")
-is_slowed = null
+
+[node name="Attack" type="Node" parent="CharacterStateMachine"]
+script = ExtResource("13_e285k")

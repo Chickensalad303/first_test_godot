@@ -21,7 +21,12 @@ func _process(delta):
 	pass
 	
 
-#func _input(event):
+func _input(event : InputEvent):
+	if (event.is_action_pressed("attack")):
+		print("here")
+		player_state = "attack"
+	
+	
 	#if event is InputEventKey:
 		#if event.is_action_pressed("k_key"):
 			## emit signal, so any script can connect to it
@@ -36,6 +41,8 @@ func _physics_process(delta):
 		player_state = "walk_horizontal"
 	elif direction.y != 0:
 		player_state = "walk_vertical"
+		
+	
 	
 	
 	#when hit by certain enemy attack you recieve a slowed status effect
@@ -47,16 +54,25 @@ func _physics_process(delta):
 		
 	#when using move_and_slide() there is no need for delta, move_and_slide() just takes velocity and multiplies it with delta and sets it as the new position
 	velocity = direction * SPEED # * delta
-	character_animation_player(delta, player_state)
+	handle_player_state(player_state)
 	#position = position + velocity
 	move_and_slide()
 
 #
 #func input_manager(event : Input):
 	#event.
+	
+func handle_player_state(player_state : String):
+	handle_player_movement(player_state)
+	handle_player_attacks(player_state)
+	
+	
+func handle_player_attacks(player_state : String):
+	if (player_state != "attack"): return
+	anim_player.play("attack")
+	
 
-
-func character_animation_player(delta, player_state):
+func handle_player_movement(player_state : String):
 	
 	if Input.is_action_just_pressed("move_right"):
 		# use scale.x to flip instead of this: _animated_sprite.flip_h = false, because it doesn't flip children
