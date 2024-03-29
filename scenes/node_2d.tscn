@@ -1,7 +1,5 @@
-[gd_scene load_steps=126 format=3 uid="uid://n4vro8la03ju"]
+[gd_scene load_steps=122 format=3 uid="uid://n4vro8la03ju"]
 
-[ext_resource type="Script" path="res://scripts/wazaahp.gd" id="1_nem0b"]
-[ext_resource type="AudioStream" uid="uid://b3dy5na0yyfnm" path="res://public/mp3/Boom (Big Shaq).mp3" id="2_sdobj"]
 [ext_resource type="Texture2D" uid="uid://dwh6k2jtm2eag" path="res://public/tiles/Tiny Swords (Update 010)/Terrain/Ground/Tilemap_Flat.png" id="3_nx0f7"]
 [ext_resource type="Texture2D" uid="uid://dfruuheg8m1qs" path="res://public/tiles/Tiny Swords (Update 010)/Terrain/Ground/Tilemap_Elevation.png" id="4_uqo75"]
 [ext_resource type="Texture2D" uid="uid://bslpifm4ifnth" path="res://public/tiles/Tiny Swords (Update 010)/Terrain/Water/Foam/Foam.png" id="5_5lvhm"]
@@ -17,7 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://bb7dvqqbypj58" path="res://public/tiles/Tiny Swords (Update 010)/Resources/Gold Mine/GoldMine_Active.png" id="13_1jtnm"]
 [ext_resource type="Texture2D" uid="uid://cync3geqlowvo" path="res://public/tiles/Tiny Swords (Update 010)/Resources/Gold Mine/GoldMine_Destroyed.png" id="14_f017v"]
 [ext_resource type="Texture2D" uid="uid://35qlhhg742u1" path="res://public/tiles/Tiny Swords (Update 010)/Resources/Gold Mine/GoldMine_Inactive.png" id="15_fscua"]
-[ext_resource type="PackedScene" uid="uid://bj1mhjnadbwau" path="res://scenes/character_body_2d.tscn" id="16_fcttd"]
+[ext_resource type="PackedScene" uid="uid://bj1mhjnadbwau" path="res://character/character_body_2d.tscn" id="16_fcttd"]
 [ext_resource type="Texture2D" uid="uid://d2685kv5vp2su" path="res://public/tiles/Kings and Pigs/Sprites/11-Door/Closiong (46x56).png" id="16_gkhy8"]
 [ext_resource type="Texture2D" uid="uid://bmx4dxi7r25p6" path="res://public/tiles/Kings and Pigs/Sprites/11-Door/Idle.png" id="17_lv42m"]
 [ext_resource type="Texture2D" uid="uid://i7r7lw5t5mj6" path="res://public/tiles/Kings and Pigs/Sprites/11-Door/Opening (46x56).png" id="18_atqqe"]
@@ -43,17 +41,6 @@
 [ext_resource type="Texture2D" uid="uid://cd7j8u26scqmy" path="res://public/tiles/Tiny Swords (Update 010)/Terrain/Water/Water_with_inside_edge.png" id="38_lu5ce"]
 [ext_resource type="Texture2D" uid="uid://bkj4qhq53ev56" path="res://public/tiles/Tiny Swords (Update 010)/Deco/05.png" id="39_syqlo"]
 [ext_resource type="Texture2D" uid="uid://bilfd1m7p2h3e" path="res://public/tiles/Tiny Swords (Update 010)/Terrain/Water/Rocks/Rocks_02.png" id="42_52qa7"]
-
-[sub_resource type="FontFile" id="FontFile_8reum"]
-cache/0/16/0/ascent = 0.0
-cache/0/16/0/descent = 0.0
-cache/0/16/0/underline_position = 0.0
-cache/0/16/0/underline_thickness = 0.0
-cache/0/16/0/scale = 1.0
-cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
-
-[sub_resource type="LabelSettings" id="LabelSettings_1bmnc"]
-font = SubResource("FontFile_8reum")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yfcpo"]
 
@@ -5266,18 +5253,6 @@ pattern_18 = SubResource("TileMapPattern_u5mxp")
 
 [node name="Node2D" type="Node2D"]
 position = Vector2(575, 307)
-
-[node name="Label" type="Label" parent="."]
-offset_left = -522.0
-offset_top = -246.0
-offset_right = -428.0
-offset_bottom = -223.0
-text = "Wazaaaahp!"
-label_settings = SubResource("LabelSettings_1bmnc")
-script = ExtResource("1_nem0b")
-
-[node name="bom_player" type="AudioStreamPlayer2D" parent="Label"]
-stream = ExtResource("2_sdobj")
 
 [node name="TileMap [old]" type="TileMap" parent="."]
 visible = false
