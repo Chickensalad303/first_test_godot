@@ -1,17 +1,27 @@
 extends Node
 class_name State
 
-@export var is_slowed : bool = false
+@export var is_attacking : bool = false
 
+signal Transitioned
 var character : CharacterBody2D
+var playback : AnimationNodeStateMachinePlayback
 var next_state : State
 
-func state_input(event: InputEvent):
+func update(delta : float):
 	pass
 
-
-func on_enter():
+func physics_update(delta : float):
 	pass
 
-func on_exit():
+#func state_process(delta):
+	#pass
+
+#func state_input(event : InputEvent):
+	#pass
+
+func enter():
+	pass
+
+func exit():
 	pass

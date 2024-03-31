@@ -5,27 +5,25 @@ extends CharacterBody2D
 @onready var sprite : Sprite2D = self.get_node("Sprite2D")
 @onready var dust_sprite : Sprite2D = self.get_node("Sprite2D/Sprite2D")
 
+@onready var anim_tree : AnimationTree = $Sprite2D/AnimationTree
 @onready var state_machine : CharacterStateMachine = $CharacterStateMachine
 
 
 # player state can be idle, attack, walk_horizontal, walk_vertical
 var player_state = "idle"
 var SPEED = 150.0
+var direction : Vector2 = Vector2.ZERO
 
-
-#signal k_pressed
 func _ready():
-	pass
+	anim_tree.active = true
 
-func _process(delta):
-	pass
-	
 
-func _input(event : InputEvent):
-	if (event.is_action_pressed("attack")):
-		print("here")
-		player_state = "attack"
-	
+#func _input(event : InputEvent):
+	#if (event.is_action_pressed("attack")):
+		#print("here")
+		#player_state = "attack"
+		##handle_player_attacks(player_state)
+	#
 	
 	#if event is InputEventKey:
 		#if event.is_action_pressed("k_key"):
@@ -34,43 +32,51 @@ func _input(event : InputEvent):
 			
 			
 func _physics_process(delta):
-	var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	if direction.x == 0 and direction.y == 0:
+	direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	if (state_machine.check_if_attacking()):
+		print("is attacking")
+	
+	
+	if (direction.x == 0 and direction.y == 0):
 		player_state = "idle"
-	elif direction.x != 0:
+	elif (direction.x != 0):
 		player_state = "walk_horizontal"
-	elif direction.y != 0:
+	elif (direction.y != 0):
 		player_state = "walk_vertical"
-		
-	
-	
 	
 	#when hit by certain enemy attack you recieve a slowed status effect
-	state_machine.current_state.is_slowed = false
+	#state_machine.current_state.is_slowed = false
 	
-	if state_machine.check_slowed() == true:
-		sprite.modulate = "#A020F0"
-		SPEED = 50.0
+	#if state_machine.check_slowed() == true:
+		#sprite.modulate = "#A020F0"
+		#SPEED = 50.0
 		
 	#when using move_and_slide() there is no need for delta, move_and_slide() just takes velocity and multiplies it with delta and sets it as the new position
 	velocity = direction * SPEED # * delta
-	handle_player_state(player_state)
+	
 	#position = position + velocity
 	move_and_slide()
+	update_animation()
+	update_facing_direction()
+	
+	
 
-#
-#func input_manager(event : Input):
-	#event.
-	
-func handle_player_state(player_state : String):
-	handle_player_movement(player_state)
-	handle_player_attacks(player_state)
+func update_animation():
+	anim_tree.set("parameters/move/blend_position", direction)
 	
 	
-func handle_player_attacks(player_state : String):
-	if (player_state != "attack"): return
-	anim_player.play("attack")
-	
+func update_facing_direction():
+	if (direction.x > 0):
+		sprite.scale.x = 1
+	elif (direction.x < 0):
+		sprite.scale.x = -1
+	#fade dust anim in and out when walking horizontally
+	if (direction.x != 0):
+		dust_sprite.modulate.a = lerpf(dust_sprite.modulate.a, 1, 0.2)
+	else:
+		dust_sprite.modulate.a = lerpf(dust_sprite.modulate.a, 0, 0.1)
+		
+
 
 func handle_player_movement(player_state : String):
 	

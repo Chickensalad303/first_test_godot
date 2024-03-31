@@ -1,15 +1,15 @@
-[gd_scene load_steps=22 format=3 uid="uid://bj1mhjnadbwau"]
+[gd_scene load_steps=30 format=3 uid="uid://bj1mhjnadbwau"]
 
-[ext_resource type="Script" path="res://scripts/Character.gd" id="1_6b0ds"]
+[ext_resource type="Script" path="res://character/Character.gd" id="1_6b0ds"]
 [ext_resource type="Texture2D" uid="uid://dwnehdos5kvfm" path="res://public/tiles/Tiny Swords (Update 010)/Factions/Knights/Troops/Pawn/Purple/Pawn_Purple.png" id="2_fymh3"]
 [ext_resource type="Texture2D" uid="uid://jyekiw37dq5u" path="res://public/tiles/Tiny Swords (Update 010)/Factions/Knights/Troops/Pawn/Purple/modified_attack_Pawn_Purple-Sheet.png" id="2_hth0n"]
 [ext_resource type="Texture2D" uid="uid://2yi8fvirgbk2" path="res://public/tiles/Tiny Swords (Update 010)/Factions/Knights/Troops/Pawn/Purple/Pawn_Purple_walkin_up-Sheet.png" id="3_iv3e4"]
 [ext_resource type="Script" path="res://character/CharacterStateMachine.gd" id="10_3rfrc"]
-[ext_resource type="Script" path="res://character/SlowedState.gd" id="11_idkss"]
+[ext_resource type="Script" path="res://character/DebugLabel.gd" id="11_85i3d"]
+[ext_resource type="Script" path="res://character/AttackState.gd" id="11_bce4n"]
+[ext_resource type="Script" path="res://character/DefaultState.gd" id="11_s6erj"]
 [ext_resource type="Texture2D" uid="uid://bfl0lkdjn3sky" path="res://public/tiles/Treasure Hunters/Treasure Hunters/The Crusty Crew/Sprites/Dust Particles/Run 01.png" id="11_uxyu0"]
 [ext_resource type="Texture2D" uid="uid://bvq1h7bo6e68e" path="res://public/tiles/Treasure Hunters/Treasure Hunters/The Crusty Crew/Sprites/Dust Particles/Run 02.png" id="12_eytcs"]
-[ext_resource type="Script" path="res://character/NormaStatel.gd" id="12_hyjom"]
-[ext_resource type="Script" path="res://character/Attack.gd" id="13_e285k"]
 [ext_resource type="Texture2D" uid="uid://dh4r8m0cdtm2j" path="res://public/tiles/Treasure Hunters/Treasure Hunters/The Crusty Crew/Sprites/Dust Particles/Run 03.png" id="13_k65ix"]
 [ext_resource type="Texture2D" uid="uid://dwodm5h3vnpre" path="res://public/tiles/Treasure Hunters/Treasure Hunters/The Crusty Crew/Sprites/Dust Particles/Run 04.png" id="14_o1bai"]
 [ext_resource type="Texture2D" uid="uid://dugcdbkkvuoa" path="res://public/tiles/Treasure Hunters/Treasure Hunters/The Crusty Crew/Sprites/Dust Particles/Run 05.png" id="15_amcpe"]
@@ -251,6 +251,42 @@ _data = {
 "walk_vertical": SubResource("Animation_f4bik")
 }
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_h8rrw"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xtadn"]
+animation = &"walk_horizontal"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pj3i4"]
+animation = &"walk_horizontal"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_itarg"]
+animation = &"walk_vertical"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_eamfm"]
+animation = &"walk_vertical"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_icx7s"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_h8rrw")
+blend_point_0/pos = Vector2(0, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_xtadn")
+blend_point_1/pos = Vector2(-1, 0)
+blend_point_2/node = SubResource("AnimationNodeAnimation_pj3i4")
+blend_point_2/pos = Vector2(1, 0)
+blend_point_3/node = SubResource("AnimationNodeAnimation_itarg")
+blend_point_3/pos = Vector2(0, 1)
+blend_point_4/node = SubResource("AnimationNodeAnimation_eamfm")
+blend_point_4/pos = Vector2(0, -1)
+blend_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ygrwx"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_uqlrc"]
+states/move/node = SubResource("AnimationNodeBlendSpace2D_icx7s")
+states/move/position = Vector2(337, 82)
+transitions = ["Start", "move", SubResource("AnimationNodeStateMachineTransition_ygrwx")]
+
 [sub_resource type="Animation" id="Animation_sdfoa"]
 resource_name = "dust"
 length = 0.80001
@@ -289,13 +325,23 @@ zoom = Vector2(2, 2)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(2.84217e-13, 1.42109e-13)
-texture = ExtResource("2_hth0n")
+texture = ExtResource("2_fymh3")
 hframes = 6
+vframes = 6
+frame = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
 "": SubResource("AnimationLibrary_gkb3s")
 }
+
+[node name="AnimationTree" type="AnimationTree" parent="Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_gkb3s")
+}
+tree_root = SubResource("AnimationNodeStateMachine_uqlrc")
+anim_player = NodePath("../AnimationPlayer")
+parameters/move/blend_position = Vector2(0, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="Sprite2D"]
 position = Vector2(-31.25, 18.75)
@@ -308,16 +354,22 @@ libraries = {
 }
 blend_times = [&"dust", &"dust", 0.5]
 
-[node name="CharacterStateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state", "character")]
+[node name="CharacterStateMachine" type="Node" parent="." node_paths=PackedStringArray("animation_tree", "initial_state")]
 script = ExtResource("10_3rfrc")
-current_state = NodePath("Normal")
-character = NodePath("..")
+animation_tree = NodePath("../Sprite2D/AnimationTree")
+initial_state = NodePath("Default")
 
-[node name="Normal" type="Node" parent="CharacterStateMachine"]
-script = ExtResource("12_hyjom")
-
-[node name="Slowed" type="Node" parent="CharacterStateMachine"]
-script = ExtResource("11_idkss")
+[node name="Default" type="Node" parent="CharacterStateMachine"]
+script = ExtResource("11_s6erj")
 
 [node name="Attack" type="Node" parent="CharacterStateMachine"]
-script = ExtResource("13_e285k")
+script = ExtResource("11_bce4n")
+is_attacking = true
+
+[node name="DebugLabel" type="Label" parent="."]
+offset_left = -69.0
+offset_top = -59.0
+offset_right = 86.0
+offset_bottom = -36.0
+text = "State:"
+script = ExtResource("11_85i3d")
