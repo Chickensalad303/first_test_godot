@@ -33,8 +33,8 @@ func _ready():
 			
 func _physics_process(delta):
 	direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	if (state_machine.check_if_attacking()):
-		print("is attacking")
+	#if (state_machine.check_if_attacking()):
+		#print("yasssss")
 	
 	
 	if (direction.x == 0 and direction.y == 0):
