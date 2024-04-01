@@ -17,8 +17,8 @@ func physics_update(delta : float):
 #func state_process(delta):
 	#pass
 
-#func state_input(event : InputEvent):
-	#pass
+func state_input(event : InputEvent):
+	pass
 
 func enter():
 	pass

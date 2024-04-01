@@ -337,7 +337,7 @@ position = Vector2(2.84217e-13, 1.42109e-13)
 texture = ExtResource("2_fymh3")
 hframes = 6
 vframes = 6
-frame = 5
+frame = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {

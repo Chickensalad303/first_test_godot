@@ -18,7 +18,7 @@ func _ready():
 			child.Transitioned.connect(on_child_transitioned)
 			#here you can set the states up with what they need to function
 			#child.character = character
-			#child.playback = animation_tree["parameters/playback"]
+			child.playback = animation_tree["parameters/playback"]
 		
 		else:
 			push_warning("child", child.name, "is not a State for CharacterStateMachine")
@@ -51,6 +51,9 @@ func on_child_transitioned(state, new_state_name):
 		current_state.exit()
 	new_state.enter()
 	current_state = new_state
+	
+func _input(event : InputEvent):
+	current_state.state_input(event)
 
 #func _physics_process(delta):
 	#if (current_state.next_state != null):
