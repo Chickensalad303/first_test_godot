@@ -7,6 +7,7 @@ extends CharacterBody2D
 
 @onready var anim_tree : AnimationTree = $Sprite2D/AnimationTree
 @onready var state_machine : CharacterStateMachine = $CharacterStateMachine
+@onready var sword_hitbox : Area2D = $Sword
 
 
 # player state can be idle, attack, walk_horizontal, walk_vertical
@@ -35,7 +36,6 @@ func _physics_process(delta):
 	direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	#if (state_machine.check_if_attacking()):
 		#print("yasssss")
-	
 	
 	if (direction.x == 0 and direction.y == 0):
 		player_state = "idle"
@@ -66,10 +66,15 @@ func update_animation():
 	
 	
 func update_facing_direction():
+	if (state_machine.get_current_animation() == "attack"):
+		return # makes so cannot turn during attack
+	
 	if (direction.x > 0):
 		sprite.scale.x = 1
+		sword_hitbox.scale.x = 1
 	elif (direction.x < 0):
 		sprite.scale.x = -1
+		sword_hitbox.scale.x = -1
 	#fade dust anim in and out when walking horizontally
 	if (direction.x != 0):
 		dust_sprite.modulate.a = lerpf(dust_sprite.modulate.a, 1, 0.2)

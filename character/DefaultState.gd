@@ -12,6 +12,7 @@ func enter():
 	print("default")
 	playback.travel(default_anim_name)
 	
+	
 func state_input(event : InputEvent):
 	if event.is_action_pressed("attack"):
 		attack()

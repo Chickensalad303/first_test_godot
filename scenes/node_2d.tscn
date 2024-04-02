@@ -1,4 +1,4 @@
-[gd_scene load_steps=122 format=3 uid="uid://n4vro8la03ju"]
+[gd_scene load_steps=123 format=3 uid="uid://n4vro8la03ju"]
 
 [ext_resource type="Texture2D" uid="uid://dwh6k2jtm2eag" path="res://public/tiles/Tiny Swords (Update 010)/Terrain/Ground/Tilemap_Flat.png" id="3_nx0f7"]
 [ext_resource type="Texture2D" uid="uid://dfruuheg8m1qs" path="res://public/tiles/Tiny Swords (Update 010)/Terrain/Ground/Tilemap_Elevation.png" id="4_uqo75"]
@@ -41,6 +41,7 @@
 [ext_resource type="Texture2D" uid="uid://cd7j8u26scqmy" path="res://public/tiles/Tiny Swords (Update 010)/Terrain/Water/Water_with_inside_edge.png" id="38_lu5ce"]
 [ext_resource type="Texture2D" uid="uid://bkj4qhq53ev56" path="res://public/tiles/Tiny Swords (Update 010)/Deco/05.png" id="39_syqlo"]
 [ext_resource type="Texture2D" uid="uid://bilfd1m7p2h3e" path="res://public/tiles/Tiny Swords (Update 010)/Terrain/Water/Rocks/Rocks_02.png" id="42_52qa7"]
+[ext_resource type="PackedScene" uid="uid://c4537ratliot8" path="res://Enemies/torch_goblin.tscn" id="42_focrs"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yfcpo"]
 
@@ -5308,3 +5309,6 @@ tile_set = SubResource("TileSet_ui8hh")
 format = 2
 layer_0/name = "props"
 layer_0/z_index = -2
+
+[node name="TorchGoblin" parent="." instance=ExtResource("42_focrs")]
+position = Vector2(259, 296)

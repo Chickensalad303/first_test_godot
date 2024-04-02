@@ -18,8 +18,8 @@ func update(delta : float):
 	var current_duration = playback.get_current_play_position()
 	#print(current_duration, "  -   ", duration)
 	if duration == current_duration:
-		print(current_anim)
 		Transitioned.emit(self, default_node_name)
+		
 		
 	
 

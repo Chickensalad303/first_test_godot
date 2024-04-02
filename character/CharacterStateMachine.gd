@@ -28,8 +28,9 @@ func _ready():
 		current_state = initial_state
 
 
-func check_if_attacking():
-	return current_state.is_attacking
+func get_current_animation():
+	#return current_state.is_attacking
+	return current_state.playback.get_current_node()
 	
 func _process(delta):
 	if (current_state):
