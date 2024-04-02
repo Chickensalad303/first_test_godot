@@ -8,6 +8,9 @@ var character : CharacterBody2D
 var playback : AnimationNodeStateMachinePlayback
 var next_state : State
 
+#ffor enemy
+var direction : Vector2
+
 func update(delta : float):
 	pass
 

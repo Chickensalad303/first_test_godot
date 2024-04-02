@@ -435,8 +435,10 @@ zoom = Vector2(2, 2)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(2.84217e-13, 1.42109e-13)
-texture = ExtResource("2_hth0n")
+texture = ExtResource("2_fymh3")
 hframes = 6
+vframes = 6
+frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
@@ -485,6 +487,8 @@ script = ExtResource("11_85i3d")
 state_machine = NodePath("../CharacterStateMachine")
 
 [node name="Sword" type="Area2D" parent="."]
+monitoring = false
+monitorable = false
 script = ExtResource("14_tw5n8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sword"]

@@ -41,7 +41,7 @@
 [ext_resource type="Texture2D" uid="uid://cd7j8u26scqmy" path="res://public/tiles/Tiny Swords (Update 010)/Terrain/Water/Water_with_inside_edge.png" id="38_lu5ce"]
 [ext_resource type="Texture2D" uid="uid://bkj4qhq53ev56" path="res://public/tiles/Tiny Swords (Update 010)/Deco/05.png" id="39_syqlo"]
 [ext_resource type="Texture2D" uid="uid://bilfd1m7p2h3e" path="res://public/tiles/Tiny Swords (Update 010)/Terrain/Water/Rocks/Rocks_02.png" id="42_52qa7"]
-[ext_resource type="PackedScene" uid="uid://c4537ratliot8" path="res://Enemies/torch_goblin.tscn" id="42_focrs"]
+[ext_resource type="PackedScene" uid="uid://c4537ratliot8" path="res://Enemies/Torch_Goblin/torch_goblin.tscn" id="42_focrs"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yfcpo"]
 

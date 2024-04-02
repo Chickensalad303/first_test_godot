@@ -1,0 +1,192 @@
+[gd_scene load_steps=17 format=3 uid="uid://c4537ratliot8"]
+
+[ext_resource type="Texture2D" uid="uid://bnkysvaux5mxt" path="res://public/tiles/Tiny Swords (Update 010)/Factions/Goblins/Troops/Torch/Yellow/Torch_Yellow.png" id="1_clyjs"]
+[ext_resource type="Script" path="res://Enemies/Torch_Goblin/torch_goblin.gd" id="1_ejgik"]
+[ext_resource type="Script" path="res://Enemies/Torch_Goblin/TorchStateMachine.gd" id="3_f1s8n"]
+[ext_resource type="Script" path="res://Enemies/Torch_Goblin/TorchDefaultState.gd" id="4_bojiw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ac5mm"]
+size = Vector2(63, 65)
+
+[sub_resource type="Animation" id="Animation_tbkw1"]
+resource_name = "idle"
+length = 0.80001
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_clyjs")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [7]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+
+[sub_resource type="Animation" id="Animation_776t2"]
+resource_name = "move_horizontal"
+length = 0.60001
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_clyjs")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [7]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [7, 8, 9, 10, 11, 12]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bqf7y"]
+_data = {
+"idle": SubResource("Animation_tbkw1"),
+"move_horizontal": SubResource("Animation_776t2")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_w58q2"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nvtuw"]
+animation = &"move_horizontal"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kpdl7"]
+animation = &"move_horizontal"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wac6t"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_amro7"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_2iavu"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_w58q2")
+blend_point_0/pos = Vector2(0, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_nvtuw")
+blend_point_1/pos = Vector2(1, 0)
+blend_point_2/node = SubResource("AnimationNodeAnimation_kpdl7")
+blend_point_2/pos = Vector2(-1, 0)
+blend_point_3/node = SubResource("AnimationNodeAnimation_wac6t")
+blend_point_3/pos = Vector2(0, 1)
+blend_point_4/node = SubResource("AnimationNodeAnimation_amro7")
+blend_point_4/pos = Vector2(0, -1)
+blend_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pnheu"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_wjoe7"]
+states/move/node = SubResource("AnimationNodeBlendSpace2D_2iavu")
+states/move/position = Vector2(338, 100)
+transitions = ["Start", "move", SubResource("AnimationNodeStateMachineTransition_pnheu")]
+
+[node name="TorchGoblin" type="CharacterBody2D"]
+script = ExtResource("1_ejgik")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-5.5, -1.5)
+shape = SubResource("RectangleShape2D_ac5mm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_clyjs")
+hframes = 7
+vframes = 5
+frame = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_bqf7y")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_bqf7y")
+}
+tree_root = SubResource("AnimationNodeStateMachine_wjoe7")
+anim_player = NodePath("../AnimationPlayer")
+parameters/move/blend_position = Vector2(0, 0)
+
+[node name="EnemyStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "animation_tree")]
+script = ExtResource("3_f1s8n")
+initial_state = NodePath("Default")
+animation_tree = NodePath("../Sprite2D/AnimationTree")
+
+[node name="Default" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("enemy_character")]
+script = ExtResource("4_bojiw")
+enemy_character = NodePath("../..")
