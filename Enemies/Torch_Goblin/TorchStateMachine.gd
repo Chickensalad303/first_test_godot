@@ -37,7 +37,7 @@ func _physics_process(delta):
 
 
 
-func on_child_transitioned(state, new_state_name):
+func on_child_transitioned(state, new_state_name, dict : Dictionary):
 	if state != current_state:
 		return
 	
@@ -47,7 +47,9 @@ func on_child_transitioned(state, new_state_name):
 	
 	if current_state:
 		current_state.exit()
-	new_state.enter()
+	
 	current_state = new_state
+	current_state.parameters = dict
+	current_state.enter()
 	
 

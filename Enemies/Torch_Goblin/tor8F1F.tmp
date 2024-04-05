@@ -161,6 +161,7 @@ transitions = ["Start", "move", SubResource("AnimationNodeStateMachineTransition
 
 [node name="TorchGoblin" type="CharacterBody2D"]
 script = ExtResource("1_ejgik")
+health = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-5.5, -1.5)
@@ -170,6 +171,7 @@ shape = SubResource("RectangleShape2D_ac5mm")
 texture = ExtResource("1_clyjs")
 hframes = 7
 vframes = 5
+frame = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {

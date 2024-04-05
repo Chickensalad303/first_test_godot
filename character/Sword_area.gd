@@ -19,8 +19,9 @@ func _on_body_entered(body):
 			var default_state : State = body.state_machine.current_state
 			var knockback_direction = global_position.direction_to(body.global_position)
 			var knockback_force = knockback_direction * 20
+			var current_position = global_position
 			#print(type_string(typeof(knockback_force)), " hello")
 			#print(body.state_machine)
-			default_state.take_damage(20, knockback_force)
+			body.take_damage(2, 300, current_position)
 		
 	

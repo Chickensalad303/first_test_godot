@@ -170,6 +170,7 @@ shape = SubResource("RectangleShape2D_ac5mm")
 texture = ExtResource("1_clyjs")
 hframes = 7
 vframes = 5
+frame = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
@@ -194,9 +195,8 @@ script = ExtResource("4_bojiw")
 enemy_character = NodePath("../..")
 move_speed = 50.0
 
-[node name="Knockback" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("enemy_character")]
+[node name="Knockback" type="Node" parent="EnemyStateMachine"]
 script = ExtResource("5_ogqyo")
-enemy_character = NodePath("../..")
 
 [node name="Attack" type="Area2D" parent="."]
 
