@@ -9,7 +9,11 @@ var playback : AnimationNodeStateMachinePlayback
 var next_state : State
 
 #ffor enemy
-var direction : Vector2
+var enemy_health : float
+var enemy_direction : Vector2
+var enemy_speed : float
+var enemy_damage_to_take : float
+var enemy_knockback_to_take : Vector2
 
 func update(delta : float):
 	pass
@@ -28,4 +32,8 @@ func enter():
 	pass
 
 func exit():
+	pass
+
+#for enemy
+func take_damage(damage : float, knockback_force : Vector2):
 	pass

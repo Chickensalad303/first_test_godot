@@ -9,7 +9,7 @@ class_name DefaultState
 @export var default_anim_name : String = "move"
 
 func enter():
-	print("default")
+	#print("default")
 	playback.travel(default_anim_name)
 	
 	

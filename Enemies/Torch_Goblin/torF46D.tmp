@@ -1,10 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://c4537ratliot8"]
+[gd_scene load_steps=18 format=3 uid="uid://c4537ratliot8"]
 
 [ext_resource type="Texture2D" uid="uid://bnkysvaux5mxt" path="res://public/tiles/Tiny Swords (Update 010)/Factions/Goblins/Troops/Torch/Yellow/Torch_Yellow.png" id="1_clyjs"]
 [ext_resource type="Script" path="res://Enemies/Torch_Goblin/torch_goblin.gd" id="1_ejgik"]
 [ext_resource type="Script" path="res://Enemies/Torch_Goblin/TorchStateMachine.gd" id="3_f1s8n"]
 [ext_resource type="Script" path="res://Enemies/Torch_Goblin/TorchDefaultState.gd" id="4_bojiw"]
-[ext_resource type="Script" path="res://Enemies/Torch_Goblin/TorchKnockbackState.gd" id="5_ogqyo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ac5mm"]
 size = Vector2(63, 65)
@@ -170,7 +169,7 @@ shape = SubResource("RectangleShape2D_ac5mm")
 texture = ExtResource("1_clyjs")
 hframes = 7
 vframes = 5
-frame = 3
+frame = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
@@ -194,9 +193,6 @@ animation_tree = NodePath("../Sprite2D/AnimationTree")
 script = ExtResource("4_bojiw")
 enemy_character = NodePath("../..")
 move_speed = 50.0
-
-[node name="Knockback" type="Node" parent="EnemyStateMachine"]
-script = ExtResource("5_ogqyo")
 
 [node name="Attack" type="Area2D" parent="."]
 

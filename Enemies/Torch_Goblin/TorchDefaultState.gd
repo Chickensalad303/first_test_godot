@@ -7,22 +7,32 @@ extends State
 var wander_time : float
 
 func randomize_wander():
-	direction = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
+	#the direction & speed variable sets the ones from the State class,
+	#which get accesed in torch_goblin.gd
+	enemy_direction = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
+	enemy_speed = move_speed
 	wander_time = randf_range(1, 5)
 	
 
 func enter():
-	#playback.travel("move")
+	playback.travel("move")
 	randomize_wander()
 # Called when the node enters the scene tree for the first time.
 
+func take_damage(damage : float, knockback_force : Vector2):
+	enemy_damage_to_take = damage
+	enemy_knockback_to_take = knockback_force
+	Transitioned.emit(self, "Knockback")
+
 func update(delta : float):
+	#print(direction, " - he")
 	if wander_time > 0:
 		wander_time = wander_time - delta
 	else:
 		randomize_wander()
 		
 func physics_update(delta : float):
-	if enemy_character:
-		enemy_character.velocity = direction * move_speed
+	#if enemy_character:
+		#enemy_character.velocity = direction * move_speed
+	pass 
 

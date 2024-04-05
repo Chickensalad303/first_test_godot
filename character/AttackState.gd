@@ -9,7 +9,7 @@ class_name AttackState
 @export var default_anim_name : String = "move"
 
 func enter():
-	print("called")
+	#print("called")
 	playback.travel(attack_anim_name)
 
 func update(delta : float):
