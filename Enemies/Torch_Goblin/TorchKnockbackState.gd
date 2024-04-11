@@ -1,7 +1,8 @@
 extends State
 
 @export var enemy_character : CharacterBody2D
-@export var knockback_limit : float
+@export var knockback_limit : float = 50
+@export var knockback_weight : float = 0.02
 var knockback_to_apply : Vector2
 
 # Called when the node enters the scene tree for the first time.
@@ -29,7 +30,7 @@ func enter():
 	
 func physics_update(delta : float):
 	#print("Knockback: ", knockback_to_apply, " -  velocity: ", enemy_character.velocity)
-	activate_knockback(50)
+	activate_knockback(knockback_limit)
 	
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -40,7 +41,7 @@ func _process(delta):
 func activate_knockback(knockback_limit : float):
 	# length of vector2 is just pythagoras theorem, good way to compare 2 vectors
 	if (knockback_to_apply.length() > knockback_limit):
-		knockback_to_apply = lerp(knockback_to_apply, Vector2.ZERO, 0.02)
+		knockback_to_apply = lerp(knockback_to_apply, Vector2.ZERO, knockback_weight)
 		print(knockback_to_apply.length(), " > ", 2)
 	else:
 		knockback_to_apply = Vector2.ZERO
