@@ -12,11 +12,12 @@ func enter():
 		return 
 	#playback.travel()
 	#print("entered knockback, damage: ", enemy_damage_to_take, "knockback: ", enemy_knockback_to_take)
-	print(parameters)
+	#print(parameters)
 	enemy_character.speed = 0
 	enemy_character.direction = Vector2.ZERO
 	knockback_to_apply = parameters.knockback_force
 	enemy_character.knockback = knockback_to_apply
+	playback.travel("get_hit")
 	
 	#enemy_health = enemy_health - enemy_damage_to_take
 	#print(enemy_health)
@@ -42,8 +43,10 @@ func activate_knockback(knockback_limit : float):
 	# length of vector2 is just pythagoras theorem, good way to compare 2 vectors
 	if (knockback_to_apply.length() > knockback_limit):
 		knockback_to_apply = lerp(knockback_to_apply, Vector2.ZERO, knockback_weight)
-		print(knockback_to_apply.length(), " > ", 2)
+		#print(knockback_to_apply.length(), " > ", 50)
+		
 	else:
 		knockback_to_apply = Vector2.ZERO
+		Transitioned.emit(self, "default", {})
 	
 	enemy_character.knockback = knockback_to_apply

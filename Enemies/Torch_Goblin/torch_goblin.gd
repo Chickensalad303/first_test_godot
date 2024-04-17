@@ -59,7 +59,7 @@ func take_damage(damage : float, knockback_strength : float, attacker_position :
 	#state_machine.current_state.enemy_knockback_to_take = knockback_force
 	#print(state_machine.current_state.enemy_knockback_to_take, " helll")
 	var parameters : Dictionary = {"damage" : damage, "knockback_force" : knockback_force}
-	state_machine.current_state.Transitioned.emit(state_machine.current_state, "Knockback", parameters)
+	state_machine.current_state.Transitioned.emit(state_machine.current_state, "knockback", parameters)
 
 	#var default_state : State = body.state_machine.current_state
 	#var knockback_direction = global_position.direction_to(body.global_position)
