@@ -5,11 +5,17 @@ extends State
 @export var knockback_weight : float = 0.02
 var knockback_to_apply : Vector2
 
+
+@export var default_node_name : String = "default"
+@export var get_hit_anim_name : String = "get_hit"
 # Called when the node enters the scene tree for the first time.
 func enter():
 	if !enemy_character:
 		push_error("please set the export variables of the State: ", name)
-		return 
+		return
+	default_node_name = default_node_name.to_lower()
+	get_hit_anim_name = get_hit_anim_name.to_lower()
+	
 	#playback.travel()
 	#print("entered knockback, damage: ", enemy_damage_to_take, "knockback: ", enemy_knockback_to_take)
 	#print(parameters)
@@ -17,17 +23,12 @@ func enter():
 	enemy_character.direction = Vector2.ZERO
 	knockback_to_apply = parameters.knockback_force
 	enemy_character.knockback = knockback_to_apply
-	playback.travel("get_hit")
+	playback.travel(get_hit_anim_name)
 	
 	#enemy_health = enemy_health - enemy_damage_to_take
 	#print(enemy_health)
 	
-	#print("damage taken: ", damage)
-	#health = health - damage
-	#velocity = velocity + knockback_force
-	#knockback = knockback_force
-	#print(knockback)
-	#velocity = direction * speed + knockback_force
+	
 	
 func physics_update(delta : float):
 	#print("Knockback: ", knockback_to_apply, " -  velocity: ", enemy_character.velocity)

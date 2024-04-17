@@ -12,7 +12,7 @@ func enter():
 	#print("called")
 	playback.travel(attack_anim_name)
 
-func update(delta : float):
+func physics_update(delta : float):
 	var current_anim = playback.get_current_node()
 	var duration = playback.get_current_length()
 	var current_duration = playback.get_current_play_position()

@@ -8,11 +8,13 @@ extends CharacterBody2D
 @onready var sprite : Sprite2D = $Sprite2D
 @onready var attack_hitbox : Area2D = $Attack
 
+@export var knockback_state_name : String = "knockback"
 var knockback : Vector2 = Vector2.ZERO
 var direction : Vector2
 var speed : float
 
 func _ready():
+	knockback_state_name = knockback_state_name.to_lower()
 	anim_tree.active = true
 	#s5tate_machine.current_state.enemy_health = health
 
@@ -59,7 +61,11 @@ func take_damage(damage : float, knockback_strength : float, attacker_position :
 	#state_machine.current_state.enemy_knockback_to_take = knockback_force
 	#print(state_machine.current_state.enemy_knockback_to_take, " helll")
 	var parameters : Dictionary = {"damage" : damage, "knockback_force" : knockback_force}
-	state_machine.current_state.Transitioned.emit(state_machine.current_state, "knockback", parameters)
+	print(knockback_state_name)
+	if (state_machine.current_state.name != knockback_state_name):
+		state_machine.current_state.Transitioned.emit(state_machine.current_state, knockback_state_name, parameters)
+	
+	
 
 	#var default_state : State = body.state_machine.current_state
 	#var knockback_direction = global_position.direction_to(body.global_position)

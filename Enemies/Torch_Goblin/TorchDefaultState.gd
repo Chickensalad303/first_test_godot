@@ -5,6 +5,9 @@ extends State
 var move_direction : Vector2
 var wander_time : float
 
+@export var knockback_node_name : String = "knockback"
+@export var default_anim_name : String = "move"
+
 func randomize_wander():
 	#the direction & speed variable sets the ones from the State class,
 	#which get accesed in torch_goblin.gd
@@ -17,7 +20,9 @@ func enter():
 	if !enemy_character:
 		push_error("please set the export variables of the State: ", name)
 		return 
-	playback.travel("move")
+	knockback_node_name = knockback_node_name.to_lower()
+	default_anim_name = default_anim_name.to_lower()
+	playback.travel(default_anim_name)
 	randomize_wander()
 # Called when the node enters the scene tree for the first time.
 
@@ -32,6 +37,7 @@ func update(delta : float):
 	if wander_time > 0:
 		wander_time = wander_time - delta
 	else:
+		Transitioned.emit(self, "attack", {})
 		randomize_wander()
 		
 func physics_update(delta : float):

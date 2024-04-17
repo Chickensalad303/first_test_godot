@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://bj1mhjnadbwau"]
+[gd_scene load_steps=36 format=3 uid="uid://bj1mhjnadbwau"]
 
 [ext_resource type="Script" path="res://character/Character.gd" id="1_6b0ds"]
 [ext_resource type="Texture2D" uid="uid://dwnehdos5kvfm" path="res://public/tiles/Tiny Swords (Update 010)/Factions/Knights/Troops/Pawn/Purple/Pawn_Purple.png" id="2_fymh3"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://bfl0lkdjn3sky" path="res://public/tiles/Treasure Hunters/Treasure Hunters/The Crusty Crew/Sprites/Dust Particles/Run 01.png" id="11_uxyu0"]
 [ext_resource type="Texture2D" uid="uid://bvq1h7bo6e68e" path="res://public/tiles/Treasure Hunters/Treasure Hunters/The Crusty Crew/Sprites/Dust Particles/Run 02.png" id="12_eytcs"]
 [ext_resource type="Texture2D" uid="uid://dh4r8m0cdtm2j" path="res://public/tiles/Treasure Hunters/Treasure Hunters/The Crusty Crew/Sprites/Dust Particles/Run 03.png" id="13_k65ix"]
+[ext_resource type="Script" path="res://character/KnockbackState.gd" id="13_sw003"]
 [ext_resource type="Texture2D" uid="uid://dwodm5h3vnpre" path="res://public/tiles/Treasure Hunters/Treasure Hunters/The Crusty Crew/Sprites/Dust Particles/Run 04.png" id="14_o1bai"]
 [ext_resource type="Script" path="res://character/Sword_area.gd" id="14_tw5n8"]
 [ext_resource type="Texture2D" uid="uid://dugcdbkkvuoa" path="res://public/tiles/Treasure Hunters/Treasure Hunters/The Crusty Crew/Sprites/Dust Particles/Run 05.png" id="15_amcpe"]
@@ -435,9 +436,10 @@ zoom = Vector2(2, 2)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(2.84217e-13, 1.42109e-13)
-texture = ExtResource("2_hth0n")
+texture = ExtResource("2_fymh3")
 hframes = 6
-frame = 4
+vframes = 6
+frame = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
@@ -476,6 +478,9 @@ script = ExtResource("11_s6erj")
 script = ExtResource("11_bce4n")
 is_attacking = true
 
+[node name="Knockback" type="Node" parent="CharacterStateMachine"]
+script = ExtResource("13_sw003")
+
 [node name="DebugLabel" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
 offset_left = -69.0
 offset_top = -59.0
@@ -486,6 +491,8 @@ script = ExtResource("11_85i3d")
 state_machine = NodePath("../CharacterStateMachine")
 
 [node name="Sword" type="Area2D" parent="."]
+monitoring = false
+monitorable = false
 script = ExtResource("14_tw5n8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sword"]

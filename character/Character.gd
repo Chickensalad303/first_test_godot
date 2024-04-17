@@ -59,11 +59,24 @@ func _physics_process(delta):
 	update_animation()
 	update_facing_direction()
 	
-	
+
 
 func update_animation():
 	anim_tree.set("parameters/move/blend_position", direction)
 	
+func take_damage(damage : float, knockback_strength : float, attacker_position : Vector2):
+	var knockback_direction =  attacker_position.direction_to(global_position)
+	var knockback_force = knockback_direction * knockback_strength
+	
+	#state_machine.current_state.enemy_damage_to_take = damage
+	#state_machine.current_state.enemy_knockback_to_take = knockback_force
+	#print(state_machine.current_state.enemy_knockback_to_take, " helll")
+	var parameters : Dictionary = {"damage" : damage, "knockback_force" : knockback_force}
+	var knockback_state_name = "knockback"
+	print(knockback_state_name, "Yesd")
+	if (state_machine.current_state.name != knockback_state_name):
+		state_machine.current_state.Transitioned.emit(state_machine.current_state, knockback_state_name, parameters)
+
 	
 func update_facing_direction():
 	if (state_machine.get_current_animation() == "attack"):
