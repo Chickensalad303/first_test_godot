@@ -6,7 +6,7 @@ extends CharacterBody2D
 @export var health : float = 20
 
 @onready var sprite : Sprite2D = $Sprite2D
-@onready var attack_hitbox : Area2D = $Attack
+@export var attack_hitbox : Area2D
 
 @export var knockback_state_name : String = "knockback"
 var knockback : Vector2 = Vector2.ZERO
@@ -23,23 +23,14 @@ func _ready():
 func _process(delta):
 	pass
 func _physics_process(delta):
-	#direction = state_machine.current_state.enemy_direction
-	#state_speed = state_machine.current_state.enemy_speed
-	#print(direction)
-	#print(direction, "and", speed)
-	#print(knockback)
+
 	velocity = direction * speed + knockback
 	
 	move_and_slide()
 	update_animation()
 	update_facing_direction()
 	
-	## length of vector2 is just pythagoras theorem, good way to compare 2 vectors
-	#if (knockback.length() > 50):
-		#knockback = lerp(knockback, Vector2.ZERO, 0.02)
-		#print(knockback.length(), " > ", 2)
-	#else:
-		#knockback = Vector2.ZERO
+
 
 func update_animation():
 	anim_tree.set("parameters/move/blend_position", direction)
@@ -51,7 +42,7 @@ func update_facing_direction():
 		attack_hitbox.scale.x = 1
 	elif (direction.x < 0):
 		sprite.scale.x = -1
-		attack_hitbox.scale.x
+		attack_hitbox.scale.x = -1
 	
 func take_damage(damage : float, knockback_strength : float, attacker_position : Vector2):
 	var knockback_direction =  attacker_position.direction_to(global_position)
@@ -61,7 +52,7 @@ func take_damage(damage : float, knockback_strength : float, attacker_position :
 	#state_machine.current_state.enemy_knockback_to_take = knockback_force
 	#print(state_machine.current_state.enemy_knockback_to_take, " helll")
 	var parameters : Dictionary = {"damage" : damage, "knockback_force" : knockback_force}
-	print(knockback_state_name)
+	#print(knockback_state_name, "hel")
 	if (state_machine.current_state.name != knockback_state_name):
 		state_machine.current_state.Transitioned.emit(state_machine.current_state, knockback_state_name, parameters)
 	
@@ -81,4 +72,5 @@ func take_damage(damage : float, knockback_strength : float, attacker_position :
 	##velocity = direction * speed + knockback_force
 	
 	
+
 

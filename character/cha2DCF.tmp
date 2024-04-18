@@ -439,7 +439,7 @@ position = Vector2(2.84217e-13, 1.42109e-13)
 texture = ExtResource("2_fymh3")
 hframes = 6
 vframes = 6
-frame = 2
+frame = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
@@ -471,9 +471,8 @@ character = NodePath("..")
 animation_tree = NodePath("../Sprite2D/AnimationTree")
 initial_state = NodePath("Default")
 
-[node name="Default" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("character_body")]
+[node name="Default" type="Node" parent="CharacterStateMachine"]
 script = ExtResource("11_s6erj")
-character_body = NodePath("../..")
 
 [node name="Attack" type="Node" parent="CharacterStateMachine"]
 script = ExtResource("11_bce4n")
@@ -482,6 +481,9 @@ is_attacking = true
 [node name="Knockback" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("character_body")]
 script = ExtResource("13_sw003")
 character_body = NodePath("../..")
+knockback_limit = null
+knockback_weight = null
+is_attacking = null
 
 [node name="DebugLabel" type="Label" parent="." node_paths=PackedStringArray("state_machine")]
 offset_left = -69.0

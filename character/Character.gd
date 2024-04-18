@@ -12,8 +12,9 @@ extends CharacterBody2D
 
 # player state can be idle, attack, walk_horizontal, walk_vertical
 var player_state = "idle"
-var SPEED = 150.0
-var direction : Vector2 = Vector2.ZERO
+var speed : float
+var direction : Vector2
+var knockback : Vector2 = Vector2.ZERO
 
 func _ready():
 	anim_tree.active = true
@@ -49,10 +50,10 @@ func _physics_process(delta):
 	
 	#if state_machine.check_slowed() == true:
 		#sprite.modulate = "#A020F0"
-		#SPEED = 50.0
+		#speed = 50.0
 		
 	#when using move_and_slide() there is no need for delta, move_and_slide() just takes velocity and multiplies it with delta and sets it as the new position
-	velocity = direction * SPEED # * delta
+	velocity = direction * speed + knockback # * delta
 	
 	#position = position + velocity
 	move_and_slide()

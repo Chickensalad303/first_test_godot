@@ -1,7 +1,7 @@
 extends State
 class_name DefaultState
 
-
+@export var character_body : CharacterBody2D
 @export var attack_node_name : String = "attack"
 @export var attack_anim_name : String = "attack"
 
@@ -9,7 +9,9 @@ class_name DefaultState
 @export var default_anim_name : String = "move"
 
 func enter():
-	#print("default")
+	if !character_body:
+		push_error("please assign the exports, they are null")
+	character_body.speed = 150.0
 	playback.travel(default_anim_name)
 	
 	

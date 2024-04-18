@@ -36,8 +36,7 @@ func _physics_process(delta):
 		current_state.physics_update(delta)
 
 
-
-func on_child_transitioned(state, new_state_name, dict : Dictionary):
+func on_child_transitioned(state, new_state_name, dict : Dictionary = {}):
 	if state != current_state:
 		return
 	
