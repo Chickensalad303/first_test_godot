@@ -395,7 +395,7 @@ shape = SubResource("RectangleShape2D_ac5mm")
 texture = ExtResource("1_clyjs")
 hframes = 7
 vframes = 5
-frame = 6
+frame = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
@@ -412,17 +412,15 @@ parameters/move/blend_position = Vector2(0.00161552, 0.00529099)
 
 [node name="EnemyStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "animation_tree")]
 script = ExtResource("3_f1s8n")
-initial_state = NodePath("Default")
+initial_state = NodePath("Follow")
 animation_tree = NodePath("../Sprite2D/AnimationTree")
 
-[node name="Default" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("torch_character")]
+[node name="Default" type="Node" parent="EnemyStateMachine"]
 script = ExtResource("4_bojiw")
 move_speed = 50.0
-torch_character = NodePath("../..")
 
-[node name="Knockback" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("torch_character")]
+[node name="Knockback" type="Node" parent="EnemyStateMachine"]
 script = ExtResource("5_ogqyo")
-torch_character = NodePath("../..")
 
 [node name="Attack" type="Node" parent="EnemyStateMachine"]
 script = ExtResource("7_qvl4r")
@@ -430,6 +428,10 @@ script = ExtResource("7_qvl4r")
 [node name="Follow" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("torch_character")]
 script = ExtResource("8_pigki")
 torch_character = NodePath("../..")
+group_name_of_player = null
+move_speed = null
+follow_limit = null
+is_attacking = null
 
 [node name="Attack" type="Area2D" parent="."]
 monitoring = false

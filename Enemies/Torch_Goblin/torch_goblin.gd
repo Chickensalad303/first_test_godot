@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 
 @onready var anim_tree : AnimationTree = $Sprite2D/AnimationTree
-@onready var state_machine : enemy_state_machine = $EnemyStateMachine
+@onready var state_machine : torch_state_machine = $EnemyStateMachine
 @export var health : float = 20
 
 @onready var sprite : Sprite2D = $Sprite2D

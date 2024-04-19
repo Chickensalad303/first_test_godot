@@ -1,5 +1,5 @@
 extends CharacterBody2D
-
+class_name player
 
 @onready var anim_player : AnimationPlayer = self.get_node("Sprite2D/AnimationPlayer")
 @onready var sprite : Sprite2D = self.get_node("Sprite2D")

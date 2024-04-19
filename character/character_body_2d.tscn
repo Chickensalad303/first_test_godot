@@ -16,9 +16,8 @@
 [ext_resource type="Script" path="res://character/Sword_area.gd" id="14_tw5n8"]
 [ext_resource type="Texture2D" uid="uid://dugcdbkkvuoa" path="res://public/tiles/Treasure Hunters/Treasure Hunters/The Crusty Crew/Sprites/Dust Particles/Run 05.png" id="15_amcpe"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4mhby"]
-radius = 15.0
-height = 50.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_31tst"]
+size = Vector2(50, 44)
 
 [sub_resource type="Animation" id="Animation_q0750"]
 resource_name = "attack"
@@ -420,16 +419,16 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jr0yn"]
 size = Vector2(50, 70)
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["player"]]
 collision_layer = 3
 collision_mask = 3
+platform_floor_layers = 4294901760
 safe_margin = 0.001
 script = ExtResource("1_6b0ds")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 15)
 rotation = 1.5708
-shape = SubResource("CapsuleShape2D_4mhby")
+shape = SubResource("RectangleShape2D_31tst")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
@@ -439,7 +438,7 @@ position = Vector2(2.84217e-13, 1.42109e-13)
 texture = ExtResource("2_fymh3")
 hframes = 6
 vframes = 6
-frame = 2
+frame = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {

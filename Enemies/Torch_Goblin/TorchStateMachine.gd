@@ -1,5 +1,5 @@
 extends Node
-class_name enemy_state_machine
+class_name torch_state_machine
 
 @export var initial_state : State
 @export var animation_tree : AnimationTree
@@ -51,4 +51,6 @@ func on_child_transitioned(state, new_state_name, dict : Dictionary = {}):
 	current_state.parameters = dict
 	current_state.enter()
 	
+#func get_state_names() -> Dictionary:
+	#return states
 
