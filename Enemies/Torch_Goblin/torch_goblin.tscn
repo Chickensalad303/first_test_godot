@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://c4537ratliot8"]
+[gd_scene load_steps=30 format=3 uid="uid://c4537ratliot8"]
 
 [ext_resource type="Texture2D" uid="uid://bnkysvaux5mxt" path="res://public/tiles/Tiny Swords (Update 010)/Factions/Goblins/Troops/Torch/Yellow/Torch_Yellow.png" id="1_clyjs"]
 [ext_resource type="Script" path="res://Enemies/Torch_Goblin/torch_goblin.gd" id="1_ejgik"]
@@ -71,7 +71,7 @@ tracks/4/path = NodePath("../Attack:monitoring")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0),
+"times": PackedFloat32Array(0.3),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
@@ -83,7 +83,7 @@ tracks/5/path = NodePath("../Attack:monitorable")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0),
+"times": PackedFloat32Array(0.3),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
@@ -365,24 +365,28 @@ blend_mode = 1
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pnheu"]
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qj2kf"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rsxhg"]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_os8pj"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_k2a2a"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7bwkk"]
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_wjoe7"]
 states/Start/position = Vector2(160, 100)
 states/attack/node = SubResource("AnimationNodeAnimation_k62p8")
-states/attack/position = Vector2(309, 166)
+states/attack/position = Vector2(358, 197)
 states/get_hit/node = SubResource("AnimationNodeAnimation_66a25")
-states/get_hit/position = Vector2(403, 109)
+states/get_hit/position = Vector2(497, 52)
 states/move/node = SubResource("AnimationNodeBlendSpace2D_2iavu")
-states/move/position = Vector2(346, 55)
-transitions = ["Start", "move", SubResource("AnimationNodeStateMachineTransition_pnheu"), "Start", "get_hit", SubResource("AnimationNodeStateMachineTransition_qj2kf"), "Start", "attack", SubResource("AnimationNodeStateMachineTransition_os8pj")]
+states/move/position = Vector2(358, 100)
+transitions = ["Start", "move", SubResource("AnimationNodeStateMachineTransition_pnheu"), "move", "attack", SubResource("AnimationNodeStateMachineTransition_rsxhg"), "attack", "move", SubResource("AnimationNodeStateMachineTransition_k2a2a"), "move", "get_hit", SubResource("AnimationNodeStateMachineTransition_7bwkk")]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0jwtc"]
-size = Vector2(47, 56)
+size = Vector2(58.5, 68)
 
 [node name="TorchGoblin" type="CharacterBody2D" node_paths=PackedStringArray("attack_hitbox")]
+collision_layer = 9
+collision_mask = 9
 platform_floor_layers = 4294901760
 script = ExtResource("1_ejgik")
 attack_hitbox = NodePath("Attack")
@@ -395,7 +399,7 @@ shape = SubResource("RectangleShape2D_ac5mm")
 texture = ExtResource("1_clyjs")
 hframes = 7
 vframes = 5
-frame = 6
+frame = 17
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
@@ -432,12 +436,12 @@ script = ExtResource("8_pigki")
 torch_character = NodePath("../..")
 
 [node name="Attack" type="Area2D" parent="."]
-monitoring = false
-monitorable = false
+collision_layer = 8
+collision_mask = 8
 script = ExtResource("8_c0tsp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Attack"]
-position = Vector2(55, 3)
+position = Vector2(60.75, 3)
 shape = SubResource("RectangleShape2D_0jwtc")
 
 [connection signal="body_entered" from="Attack" to="Attack" method="_on_body_entered"]

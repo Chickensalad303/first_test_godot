@@ -55,6 +55,7 @@ attack={
 
 [layer_names]
 
+2d_physics/layer_1="terrain"
 2d_physics/layer_2="props"
 2d_physics/layer_4="hitboxes"
 

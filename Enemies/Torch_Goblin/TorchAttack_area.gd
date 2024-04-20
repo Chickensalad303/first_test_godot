@@ -16,12 +16,10 @@ func _process(delta):
 
 func _on_body_entered(body):
 	if ("CharacterBody2D" in body.name):
-		if ("Default" in body.state_machine.current_state.name):
+		var current : String = body.state_machine.current_state.name.to_lower()
+		var interruptible_states : Array = ["default", "follow", "attack"]
+		if (interruptible_states.has(current) == true):
 			
-			#var default_state : State = body.state_machine.current_state
-			#var knockback_direction = global_position.direction_to(body.global_position)
-			#var knockback_force = knockback_direction * knockback_strength
 			var current_position = global_position
-			#print(type_string(typeof(knockback_force)), " hello")
-			#print(body.state_machine)
 			body.take_damage(damage_to_deal, knockback_strength, current_position)
+		

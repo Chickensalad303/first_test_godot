@@ -1,7 +1,7 @@
 extends State
 @export var torch_character : CharacterBody2D
 @export var move_speed : float = 100
-@export var attack_threshold : float = 50
+@export var attack_threshold : float = 75
 
 @export var group_name_of_player : String = "player"
 @export var default_node_name : String = "default"
